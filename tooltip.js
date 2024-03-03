@@ -5,14 +5,26 @@ class Tooltip extends HTMLElement {
     this._tooltipContainer;
     this._tooltipText = "Some dummy tooltip text";
     this.attachShadow({ mode: "open" });
-    const template = document.querySelector("#tooltip-template");
-    this.shadowRoot.appendChild(template.content.cloneNode(true)); // true to deep clone
+    this.shadowRoot.innerHTML = `
+   <style> 
+   div {
+       background-color: black; 
+       color: white;
+       position: absolute;
+       z-index: 10;
+       background-color : "black";
+    }
+
+   </style>
+    <slot></slot>
+    <span> (?) </span>
+    `;
   }
   connectedCallback() {
     if (this.hasAttribute("text")) {
       this._tooltipText = this.getAttribute("text");
     }
-    tooltipIcon = this.shadowRoot.querySelector("span");
+    const tooltipIcon = this.shadowRoot.querySelector("span");
     tooltipIcon.addEventListener("mouseenter", this._showTooltip.bind(this));
     tooltipIcon.addEventListener("mouseleave", this._hideTooltip.bind(this));
 
@@ -25,10 +37,6 @@ class Tooltip extends HTMLElement {
     this._tooltipContainer = document.createElement("div");
     this._tooltipContainer.textContent = this._tooltipText;
     this.shadowRoot.appendChild(this._tooltipContainer);
-    this._tooltipContainer.style.backgroundColor = "black";
-    this._tooltipContainer.style.color = "white";
-    this._tooltipContainer.style.position = "absolute";
-    this._tooltipContainer.style.zIndex = "10";
   }
   _hideTooltip() {
     this.shadowRoot.removeChild(this._tooltipContainer);

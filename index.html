@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Web Components</title>
+    <style>
+      div {
+        border: 2px solid orange;
+      }
+    </style>
     <script src="tooltip.js"></script>
   </head>
   <body>
-    <template id="tooltip-template">
+    <!-- <template id="tooltip-template">
       <slot></slot><span> (?) </span>
-      <!-- slot enables us to pass the content from between our new component tag ie <ec-tooltip> to th etemplate -->
-    </template>
+      slot enables us to pass the content from between our new component tag ie <ec-tooltip> to th etemplate
+    </template> -->
     <p>
       <ec-tooltip text="Web Components is a set of standards">
         Web components
@@ -19,5 +24,7 @@
       are awesome!
     </p>
     <ec-tooltip> Here we go </ec-tooltip>
+    <hr />
+    <div>This does not get the web compt styles</div>
   </body>
 </html>
