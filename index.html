@@ -9,7 +9,8 @@
   </head>
   <body>
     <template id="tooltip-template">
-      <span> (?) </span>
+      <slot></slot><span> (?) </span>
+      <!-- slot enables us to pass the content from between our new component tag ie <ec-tooltip> to th etemplate -->
     </template>
     <p>
       <ec-tooltip text="Web Components is a set of standards">
